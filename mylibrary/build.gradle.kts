@@ -58,17 +58,12 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
+            // Nama publication harus cocok dengan variant "release"
             create<MavenPublication>("release") {
                 from(components["release"])
-                artifactId = "mylibrary"      // ← artifact name for external consume
-                pom {
-                    name.set("ComposeLibrary")
-                    description.set("Reusable components for Compose")
-                    url.set("https://github.com/rikyahmad/ComposeLibrary")
-                    licenses { license { name.set("Apache-2.0") } }
-                    developers { developer { id.set("rikyahmad") } }
-                    scm { url.set("https://github.com/rikyahmad/ComposeLibrary.git") }
-                }
+                artifactId = "mylibrary"   // ← ini yang menentukan koordinat
+                // groupId diambil dari "group" di atas
+                // version diisi otomatis oleh JitPack dari TAG
             }
         }
     }

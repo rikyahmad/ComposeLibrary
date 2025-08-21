@@ -1,0 +1,4 @@
+# ComposeLibrary/jitpack.yml
+jdk: [ openjdk17 ]
+gradle:
+  wrapper: true

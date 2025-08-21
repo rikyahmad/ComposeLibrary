@@ -1,15 +1,24 @@
+# IDE
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+
+# Gradle
+.gradle/
+**/build/
+
+# NDK/CMake
+.externalNativeBuild/
+.cxx/
+
+# OS
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+
+# Local config & secrets (jangan pernah di-commit)
 local.properties
+**/local.properties
+*.jks
+*.keystore
+*.pem
+
+# Misc
+captures/

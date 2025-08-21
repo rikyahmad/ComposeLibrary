@@ -30,7 +30,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 # Libs
-mylib-remote = { module = "com.github.rikyahmad:mylibrary", version = "1.0.0" }
+mylib-remote = { module = "com.github.rikyahmad:ComposeLibrary", version = "1.0.1" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

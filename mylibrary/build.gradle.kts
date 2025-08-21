@@ -1,10 +1,13 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     id("maven-publish")
 }
 
-group = "com.github.rikyahmad"
+group = providers.gradleProperty("POM_GROUP").get()
+version = providers.gradleProperty("VERSION_NAME").get()
 
 android {
     namespace = "com.staygrateful.mylibrary"
@@ -54,16 +57,37 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
-// Publication for JitPack
+// load local.properties (untuk kredensial GPR)
+val lp = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+val gprUser = lp.getProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME") ?: "github"
+val gprKey  = lp.getProperty("gpr.key")  ?: System.getenv("GITHUB_TOKEN") ?: ""
+
 afterEvaluate {
     publishing {
         publications {
-            // Nama publication harus cocok dengan variant "release"
+            // pakai named kalau sudah ada “release”; kalau belum ada, boleh create<...>("release")
             create<MavenPublication>("release") {
                 from(components["release"])
-                artifactId = "mylibrary"   // ← ini yang menentukan koordinat
-                // groupId diambil dari "group" di atas
-                // version diisi otomatis oleh JitPack dari TAG
+                artifactId = "composelibrary" // ← lowercase, aman
+                // optional: pom info
+                pom {
+                    name.set("composelibrary")
+                    packaging = "aar"
+                }
+            }
+        }
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/rikyahmad/ComposeLibrary")
+                credentials {
+                    // ambil dari local.properties
+                    username = gprUser
+                    password = gprKey
+                }
             }
         }
     }

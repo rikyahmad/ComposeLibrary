@@ -1,5 +1,10 @@
-jdk: [ openjdk17 ]
-gradle:
-  wrapper: true
+jdk:
+  - openjdk17
+
+before_install:
+  # Pastikan SDK 35 & Build Tools 35 tersedia di runner JitPack
+  - yes | sdkmanager "platforms;android-35" "build-tools;35.0.0" || true
+
 install:
-  - ./gradlew :mylibrary:publishToMavenLocal -x test
+  # Publish hanya modul library ke Maven Local milik JitPack
+  - ./gradlew :mylibrary:publishReleasePublicationToMavenLocal

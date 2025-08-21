@@ -8,7 +8,7 @@ group = "com.github.rikyahmad"
 
 android {
     namespace = "com.staygrateful.mylibrary"
-    compileSdk = 36
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24

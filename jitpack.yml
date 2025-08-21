@@ -1,4 +1,5 @@
-# ComposeLibrary/jitpack.yml
 jdk: [ openjdk17 ]
 gradle:
   wrapper: true
+install:
+  - ./gradlew :mylibrary:publishToMavenLocal -x test
